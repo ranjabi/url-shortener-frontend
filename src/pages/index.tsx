@@ -74,6 +74,21 @@ export default function Index() {
       </form>
       <div className="mt-8 flex flex-col w-[30rem] gap-6 absolute ml-auto mr-auto left-0 right-0 top-[480px]">
         {createdUrls.map(url => {
+          const handleCopy = () => {
+            navigator.clipboard.writeText(url.shortUrl).then(() => {
+              toast({
+                variant: 'success',
+                title: 'URL copied to clipboard!'
+              })
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            }).catch((_) => {
+              toast({
+                variant: 'destructive',
+                title: 'Failed to copy',
+              })
+            });
+          };
+
           return (
             <div key={url.id} className="bg-gray-200 rounded-lg px-4 py-5">
               <div>
@@ -84,7 +99,7 @@ export default function Index() {
                 <p>Your Short URL</p>
                 <div className="flex items-center bg-red-100 mt-1 h-10">
                   <Input value={url.shortUrl} readOnly className="bg-white h-full rounded-r-none" />
-                  <Button type="submit" className="rounded-l-none h-full bg-white text-green-600 hover:text-white hover:bg-green-600 border border-green-600">Copy</Button>
+                  <Button type="submit" onClick={handleCopy} className="rounded-l-none h-full bg-white text-green-600 hover:text-white hover:bg-green-600 border border-green-600">Copy</Button>
                 </div>
               </div>
             </div>
