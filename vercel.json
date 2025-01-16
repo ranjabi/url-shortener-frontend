@@ -1,7 +1,7 @@
 {
     "rewrites": [
       {
-        "source": "/test/:path*",
+        "source": "/:path*",
         "destination": "https://api.urlshortener.ranjabi.com/urls/:path*"
       }
     ]
